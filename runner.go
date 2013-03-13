@@ -57,7 +57,7 @@ func createWriterlessRunner() *Runner {
 
 // Register a step definition. This requires a regular expression
 // pattern and a function to execute.
-func (r *Runner) RegisterStepDef(pattern string, f func(*World)) {
+func (r *Runner) RegisterStepDef(pattern string, f interface{}) {
     r.steps = append(r.steps, createstepdef(pattern, f))
 }
 
@@ -290,6 +290,7 @@ func PrintReport(rpt Report, output io.Writer) {
 // locate all *.feature files within the feature/ subdirectory
 // of the current directory.
 func (r *Runner) Run() {
+    fmt.Print("Run")
     featureMatch, _ := re.Compile(`.*\.feature`)
     filepath.Walk("features", func(walkPath string, info os.FileInfo, err error) error {
         if err != nil {
