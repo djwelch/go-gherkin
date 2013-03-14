@@ -109,7 +109,7 @@ func (s *scenario) Last() *step {
 func (s *scenario) Execute(stepdefs []stepdef, output io.Writer) Report {
     rpt := Report{}
     if output != nil {
-        fmt.Fprintf(output, s.orig + "\n")
+        fmt.Fprintf(output, "%s\n", s.orig)
     }
     isPending := false
     for _, line := range s.steps {
@@ -140,11 +140,14 @@ func (s *scenario) Execute(stepdefs []stepdef, output io.Writer) Report {
                 rpt.passedSteps++
             }
             if output != nil {
-                fmt.Fprintf(output, "%s", line.orig)
+                fmt.Fprintf(output, "%s\n", line.orig)
             }
         }
         if output != nil {
-            fmt.Fprintf(output, "\n\t%v\n", &line.errors)
+            str := line.errors.String()
+            if len(str) > 0 {
+                fmt.Fprintf(output, "\n\t%s\n", str) 
+            }
         }
     }
     return rpt

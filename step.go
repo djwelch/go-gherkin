@@ -44,7 +44,6 @@ func (s *step) recoverPending() {
 func (currStep *step) executeStepDef(steps []stepdef) bool {
     defer currStep.recoverPending()
     for _, stepd := range steps {
-            //fmt.Printf("Executing step %s with stepdef %d (%v)\n", currStep, i, stepd)
         if stepd.execute(currStep, &currStep.errors) {
             return true
         }

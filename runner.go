@@ -22,7 +22,7 @@ type Runner struct {
 }
 
 func (r *Runner) addStepLine(line, orig string) {
-    r.currScenario.AddStep(StepFromStringAndOrig(line, orig))
+    r.currScenario.AddStep(StepFromStringAndOrig(line, orig));
 }
 
 func (r *Runner) currStepLine() step {
@@ -290,7 +290,6 @@ func PrintReport(rpt Report, output io.Writer) {
 // locate all *.feature files within the feature/ subdirectory
 // of the current directory.
 func (r *Runner) Run() {
-    fmt.Print("Run")
     featureMatch, _ := re.Compile(`.*\.feature`)
     filepath.Walk("features", func(walkPath string, info os.FileInfo, err error) error {
         if err != nil {
