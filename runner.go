@@ -8,6 +8,7 @@ import (
     "io/ioutil"
     "path/filepath"
     "os"
+    "testing"
 )
 
 type Runner struct {
@@ -289,7 +290,8 @@ func PrintReport(rpt Report, output io.Writer) {
 // Once the step definitions are Register()'d, use Run() to
 // locate all *.feature files within the feature/ subdirectory
 // of the current directory.
-func (r *Runner) Run() {
+func (r *Runner) Run(te *testing.T) {
+    t = te
     featureMatch, _ := re.Compile(`.*\.feature`)
     filepath.Walk("features", func(walkPath string, info os.FileInfo, err error) error {
         if err != nil {
